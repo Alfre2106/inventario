@@ -9,6 +9,10 @@ from app.routers import categoria
 
 app = FastAPI()
 
+@app.get("/")
+def read_root():
+    return {"message": "API Inventario en línea"}
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # Permitir frontend desde cualquier origen (ajustar en producción)
