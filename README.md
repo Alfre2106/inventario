@@ -1,183 +1,222 @@
-# Inventario Backend 🏪
+# Sistema de Inventario - Backend API
 
-## 👥 Integrantes del Proyecto
+API REST para la gestión de inventarios desarrollada con FastAPI.  
+Permite administrar productos, categorías y autenticación de usuarios mediante JWT, con integración a base de datos MySQL.
+
+Este proyecto fue desarrollado como práctica de desarrollo backend aplicando arquitectura de APIs, manejo de base de datos y buenas prácticas de desarrollo.
+
+---
+
+# Integrantes del Proyecto
 - Alfredo Mercado
 - Edgar Rodelo
 - Miguel Ángel de la Hoz
 
-## 📦 Descripción del Proyecto
-Inventario Backend es una aplicación web robusta de gestión de inventario desarrollada con FastAPI, diseñada para proporcionar una solución integral de administración de productos y categorías para pequeñas y medianas empresas.
+---
 
-## 🎯 Objetivos del Proyecto
-- Gestionar inventario de manera eficiente
-- Facilitar el registro y seguimiento de productos
-- Proporcionar autenticación segura
-- Ofrecer una API REST escalable y mantenible
+# Arquitectura del Sistema
 
-## 🛠️ Tecnologías Utilizadas
-### Lenguajes y Frameworks
-- **Backend**: Python 3.13
-- **Framework Web**: FastAPI
-- **ORM**: SQLAlchemy
+El sistema sigue una arquitectura basada en API REST.
 
-### Base de Datos
-- **Sistema de Gestión**: MySQL
-- **Herramienta**: XAMPP (Recomendado)
+Cliente (Frontend / Postman)  
+↓  
+FastAPI (Controladores / Routers)  
+↓  
+Lógica de negocio  
+↓  
+SQLAlchemy ORM  
+↓  
+Base de datos MySQL
 
-### Autenticación
-- **Método**: JWT (JSON Web Tokens)
-- **Librería**: python-jose
+---
 
-### Dependencias Principales
-- Pydantic (Validación de datos)
-- PyMySQL (Conector de Base de Datos)
-- Uvicorn (Servidor ASGI)
+# Tecnologías Utilizadas
 
-## 📋 Requisitos Previos
-### Requisitos de Sistema
+Backend
+- Python 3.13
+- FastAPI
+- SQLAlchemy
+
+Base de datos
+- MySQL
+- PyMySQL
+
+Autenticación
+- JWT (JSON Web Tokens)
+- python-jose
+
+Servidor
+- Uvicorn
+
+Validación de datos
+- Pydantic
+
+Pruebas y documentación
+- Swagger UI
+- Postman
+
+---
+
+# Características del Sistema
+
+- API REST estructurada
+- Autenticación segura con JWT
+- CRUD de productos
+- CRUD de categorías
+- Documentación automática con Swagger
+- Arquitectura modular
+- Validación de datos
+- Integración con MySQL
+- Pruebas de endpoints con Postman
+
+---
+
+# Requisitos
+
 - Python 3.13 o superior
-- MySQL 8.0+
-- pip (Gestor de paquetes de Python)
-
-### Herramientas Recomendadas
-- XAMPP
-- Visual Studio Code
+- MySQL 8+
+- pip
 - Git
-- Postman (Para pruebas de API)
 
-## 🔧 Pasos de Instalación
+Herramientas recomendadas
+- Visual Studio Code
+- XAMPP
+- Postman
 
-### 1. Clonar Repositorio
+---
+
+# Instalación
+
+## Clonar repositorio
 ```bash
 git clone https://github.com/Alfre2106/inventario-backend.git
 cd inventario-backend
 ```
 
-### 2. Crear Entorno Virtual
-```bash
-# En Windows
-python -m venv venv
-.\venv\Scripts\activate
+## Crear entorno virtual
 
-# En macOS/Linux
+Windows
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+
+Linux / Mac
+```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-### 3. Instalar Dependencias
+## Instalar dependencias
 ```bash
 pip install -r requirements.txt
 ```
 
-## 🗄️ Configuración de Base de Datos
+---
 
-### Configurar MySQL
-1. Iniciar XAMPP
-2. Crear base de datos:
+# Configuración de Base de Datos
+
+Crear base de datos:
+
 ```sql
 CREATE DATABASE inventario;
 USE inventario;
 ```
 
-### Inicializar Proyecto
-```bash
-# Crear tablas
-python create_tables.py
+Inicializar tablas del sistema:
 
-# Inicializar categorías
+```bash
+python create_tables.py
 python init_categorias.py
 ```
 
-## ⚙️ Configuración del Proyecto
-### Variables de Entorno
-- Crear archivo `.env`
-- Configurar:
-  - Credenciales de base de datos
-  - Clave secreta para JWT
-  - Parámetros de conexión
+---
 
-## 🚀 Ejecutar la Aplicación
+# Variables de entorno
 
-### Modo Desarrollo
+Crear archivo `.env`:
+
+```
+DB_USER=root
+DB_PASSWORD=tu_password
+DB_NAME=inventario
+SECRET_KEY=clave_super_secreta
+```
+
+---
+
+# Ejecutar la Aplicación
+
+Modo desarrollo
+
 ```bash
 uvicorn app.main:app --reload
 ```
 
-### Modo Producción
-```bash
-uvicorn app.main:app --host 0.0.0.0 --port 8000
+Documentación interactiva
+
+```
+http://localhost:8000/docs
 ```
 
-## 📡 Documentación de API
-- **Swagger UI**: `http://localhost:8000/docs`
-- **Explora endpoints interactivamente**
-- **Prueba funcionalidades en tiempo real**
+---
 
-## 🔐 Autenticación
+# Flujo de Autenticación
 
-### Flujo de Autenticación
-1. Registro de usuario
-2. Inicio de sesión
-3. Obtención de token JWT
-4. Uso de token en solicitudes protegidas
+1. El usuario se registra en el sistema
+2. Inicia sesión
+3. El servidor genera un token JWT
+4. El cliente usa el token para acceder a rutas protegidas
 
-### Endpoints de Autenticación
-- `/auth/register`: Registro de usuarios
-- `/auth/login`: Inicio de sesión
-- `/auth/me`: Información del usuario actual
+---
 
-## 📦 Endpoints Principales
+# Endpoints principales
 
-### Gestión de Productos
-- `GET /productos`: Listar productos
-- `POST /productos`: Crear producto
-- `PUT /productos/{id}`: Actualizar producto
-- `DELETE /productos/{id}`: Eliminar producto
+Autenticación
+- POST /auth/register
+- POST /auth/login
+- GET /auth/me
 
-### Gestión de Categorías
-- `GET /categoria`: Listar categorías
-- `POST /categoria`: Crear categoría
-- `PUT /categoria/{id}`: Actualizar categoría
+Productos
+- GET /productos
+- POST /productos
+- PUT /productos/{id}
+- DELETE /productos/{id}
 
-## 🧪 Ejemplos de Uso
+Categorías
+- GET /categoria
+- POST /categoria
+- PUT /categoria/{id}
 
-### Crear Producto
-```python
+---
+
+# Ejemplo de Request
+
+Crear producto
+
+```json
 POST /productos
 {
-    "nombre": "Laptop Gaming",
-    "descripcion": "Laptop de alto rendimiento",
-    "precio": 1500.00,
-    "categoria_id": 1,
-    "stock": 10
+  "nombre": "Laptop Gaming",
+  "descripcion": "Laptop de alto rendimiento",
+  "precio": 1500,
+  "categoria_id": 1,
+  "stock": 10
 }
 ```
 
-### Iniciar Sesión
-```python
-POST /auth/login
-{
-    "username": "admin",
-    "password": "contraseña_segura"
-}
-```
+---
 
-## 🤝 Contribuciones
-1. Haz un fork del repositorio
-2. Crea una rama nueva: `git checkout -b feature/nueva-caracteristica`
-3. Realiza tus cambios
-4. Prueba exhaustivamente
-5. Crea un Pull Request
+# Estructura del Proyecto
 
-## 📊 Estructura del Proyecto
 ```
-inventario-backend/
+inventario-backend
 │
-├── app/
+├── app
 │   ├── main.py
 │   ├── database.py
 │   ├── models.py
-│   └── routers/
+│   └── routers
 │       ├── auth.py
 │       ├── productos.py
 │       └── categoria.py
@@ -187,8 +226,26 @@ inventario-backend/
 └── init_categorias.py
 ```
 
-## 🐛 Solución de Problemas
-- Revisa logs de la aplicación
-- Verifica conexión de base de datos
-- Asegúrate de tener todas las dependencias
-- Consulta la documentación de API
+---
+
+# Objetivo del Proyecto
+
+Este proyecto fue desarrollado para demostrar conocimientos en:
+
+- Desarrollo de APIs REST
+- Arquitectura backend
+- Autenticación con JWT
+- Manejo de bases de datos
+- Documentación de APIs
+- Pruebas de endpoints
+- Organización de proyectos backend
+
+---
+
+# Posibles mejoras futuras
+
+- Sistema de roles de usuario
+- Paginación en endpoints
+- Dashboard frontend conectado a la API
+- Deploy en servidor o cloud
+- Tests automatizados
