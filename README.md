@@ -7,10 +7,9 @@ Este proyecto fue desarrollado como práctica de desarrollo backend aplicando ar
 
 ---
 
-# Integrantes del Proyecto
+# Autor 
 - Alfredo Mercado
-- Edgar Rodelo
-- Miguel Ángel de la Hoz
+
 
 ---
 
